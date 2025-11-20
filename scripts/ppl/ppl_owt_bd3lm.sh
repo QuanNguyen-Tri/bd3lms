@@ -13,10 +13,10 @@
 #SBATCH --open-mode=append            # Do not overwrite logs
 #SBATCH --requeue                     # Requeue upon preemption
 
-BLOCK_SIZE=4
+BLOCK_SIZE=16
 
 srun python -u main.py \
-    loader.eval_batch_size=16 \
+    loader.eval_batch_size=1 \
     model=small \
     algo=bd3lm \
     algo.backbone=hf_dit \
