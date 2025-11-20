@@ -92,7 +92,7 @@ def generate_samples(config, logger, tokenizer):
     model.ema = None
   text_samples = model.restore_model_and_sample(
     num_steps=config.algo.T)
-  print('Text samples:', text_samples)
+  # print('Text samples:', text_samples)
   print('Generative perplexity:',
         model.metrics.gen_ppl.compute())
   print('Entropy:', model.metrics.gen_entropy.compute())
