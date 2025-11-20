@@ -138,7 +138,7 @@ To compute test perplexity, use `mode=ppl_eval`. Example scripts are provided in
 BLOCK_SIZE=4 # 4, 8, 16
 
 python -u main.py \
-    loader.eval_batch_size=16 \
+    loader.eval_batch_size=1 \
     model=small \
     algo=bd3lm \
     algo.backbone=hf_dit \
