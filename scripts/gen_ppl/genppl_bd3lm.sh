@@ -33,5 +33,5 @@ python -u main.py \
     seed=$SEED \
     sampling.num_sample_batches=300 \
     sampling.nucleus_p=0.9 \
-    sampling.kv_cache=true \
+    sampling.kv_cache=false \
     sampling.logdir=$PWD/sample_logs/samples_bd3lm_len${LENGTH}_blocksize${BLOCK_SIZE}
