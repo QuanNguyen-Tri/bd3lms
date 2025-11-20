@@ -653,6 +653,7 @@ class Diffusion(L.LightningModule):
     if batch_size_per_gpu is None:
       batch_size_per_gpu = self.config.loader.eval_batch_size
     samples = []
+    print(self.config.sampling.num_sample_batches)
     if self.parameterization == 'ar':
       for _ in range(self.config.sampling.num_sample_batches):
         sample_i, num_tries = None, 0
