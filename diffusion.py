@@ -653,7 +653,9 @@ class Diffusion(L.LightningModule):
     if batch_size_per_gpu is None:
       batch_size_per_gpu = self.config.loader.eval_batch_size
     samples = []
-    print(self.config.sampling.num_sample_batches)
+    num_tokens = 0
+    import time
+    start_time = time.time()
     if self.parameterization == 'ar':
       for _ in range(self.config.sampling.num_sample_batches):
         sample_i, num_tries = None, 0
@@ -681,6 +683,7 @@ class Diffusion(L.LightningModule):
         samples.append(sample_i)
         self.metrics.nfes.update(nfes)
         self.metrics.gen_nfes.append(nfes)
+        num_tokens += sample_i.numel()
     else:
       nfes = num_steps
       for _ in range(self.config.sampling.num_sample_batches):
@@ -698,6 +701,10 @@ class Diffusion(L.LightningModule):
         self.metrics.nfes.update(nfes)
         self.metrics.gen_nfes.append(nfes)
     samples = torch.cat(samples, dim=0) 
+    end_time = time.time()
+    print(f"Total number of tokens generated: {num_tokens}")
+    print(f"Total time taken: {end_time - start_time} seconds")
+    print(f"Tokens per second: {num_tokens / (end_time - start_time)}")
     return self.tokenizer.batch_decode(samples)
 
   def _sigma_from_p(self, p):
