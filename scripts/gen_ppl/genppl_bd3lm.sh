@@ -17,7 +17,7 @@ LENGTH=1024
 SEED=2
 BLOCK_SIZE=16
 
-srun python -u main.py \
+python -u main.py \
     loader.eval_batch_size=1 \
     model=small \
     algo=bd3lm \
